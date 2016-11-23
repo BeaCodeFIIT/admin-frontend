@@ -1,0 +1,14 @@
+<div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Odstrániť používateľa</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+
+
+    <h3 ng-repeat="user in users"><a ui-sref="dashboard.user-delete">{{user.surname}}</a>
+        <button type="button" ng-click="deleteEvent()" class="btn btn-danger btn-circle"><i class="fa fa-times"></i></button>
+    </h3>
+
+</div>
