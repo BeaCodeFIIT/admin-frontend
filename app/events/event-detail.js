@@ -15,7 +15,17 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
                     url: apiUrl + '/admin-web/events/1/exhibits/new',
                 },
                 get: {method: 'GET', isArray: false},
-                update: {method: 'PUT'}
+                update: {method: 'PUT'},
+                getBeaconsList: {
+                    method: 'GET',
+                    isArray: false,
+                    url: apiUrl + '/admin-web/beacons',
+                },
+                setExhibitBeacon: {
+                    method: 'PATCH',
+                    isArray: false,
+                    url: apiUrl + '/admin-web/beacons/:id',
+                }
             };
 
             var resource = $resource(apiUrl + '/admin-web/events/:id', {}, actions)
@@ -24,14 +34,26 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
                 $scope.eventsData = resourceData.data;
             });
 
-
-
-
-
             $scope.eventId = $stateParams.id;
 
 
+            resource.getBeaconsList().$promise.then(function (beaconsData) {
+                $scope.beaconsList= beaconsData.data;
+            });
+            $scope.selectedBeacon = 'krasny';
 
+
+
+            $scope.selectBeacon = function (exhibitId, beacon) {
+                console.log(exhibitId);
+                console.log(beacon.id);
+                $scope.updateObjectBeacon = {
+                    'op': 'replace',
+                    'path': '/exhibitId',
+                    'value': exhibitId,
+                }
+                resource.setExhibitBeacon({id: beacon.id}, $scope.updateObjectBeacon)
+            }
 
 
 
