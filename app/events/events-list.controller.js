@@ -17,8 +17,6 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
       $scope.events = [];
 
 
-
-
       var actions = {
           create: {
               method: 'POST',
@@ -75,21 +73,5 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
           resource.createExhibit(newExhibit);
 
       }
-
-
-
-
-
-
-
-      //$scope.eventResource = resource.get();
-
-
-
-      /*eventResource.promise.then(function(data){
-           $scope.eventData = data;
-      });*/
-
-
 
   }]);
