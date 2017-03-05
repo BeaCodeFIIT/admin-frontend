@@ -153,6 +153,25 @@ angular
             }
         }
     })
+        .state('dashboard.categories',{
+            url:'/categories-:id',
+            controller: 'CategoriesCtrl',
+            templateUrl:'categories/categories-list.html',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'categories/categories-list.controller.js',
+                            'scripts/directives/timeline/timeline.js',
+                            'scripts/directives/notifications/notifications.js',
+                            'scripts/directives/chat/chat.js',
+                            'scripts/directives/dashboard/stats/stats.js'
+                        ]
+                    })
+                }
+            }
+        })
       .state('dashboard.form',{
         templateUrl:'views/form.html',
         url:'/form'
