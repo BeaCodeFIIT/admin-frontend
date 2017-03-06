@@ -5,7 +5,7 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
         function($scope, $resource, $stateParams, $route) {
             'use strict';
 
-            var apiUrl = 'http://team06-16.studenti.fiit.stuba.sk/beacode_dev/current/web/app.php/api';
+            var apiUrl = 'http://team06-16.studenti.fiit.stuba.sk/beacode_dev/current/web/app.php/api/admin-web';
 
             //var apiUrl = 'http://147.175.149.218/beacode_dev/current/web/app.php/api';
 
@@ -15,10 +15,10 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
                 createExhibit: {
                     method: 'POST',
                     isArray: false,
-                    url: apiUrl + '/admin-web/events/1/exhibits/new',
+                    url: apiUrl + '/events/1/exhibits/new',
                     headers: { 'deviceId': '123456' }
                 },
-                get: {
+                getEventData: {
                     method: 'GET',
                     isArray: false,
                     headers: { 'deviceId': '123456' }
@@ -27,19 +27,31 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
                 getBeaconsList: {
                     method: 'GET',
                     isArray: false,
-                    url: apiUrl + '/admin-web/beacons'
+                    url: apiUrl + '/beacons',
+                    headers: { 'deviceId': '123456' }
                 },
                 setExhibitBeacon: {
                     method: 'PATCH',
                     isArray: false,
-                    url: apiUrl + '/admin-web/beacons/:id',
+                    url: apiUrl + '/beacons/:id',
+                    headers: { 'deviceId': '123456' }
+                },
+                getEventExhibits: {
+                    method: 'GET',
+                    isArray: false,
+                    url: apiUrl + '/events/:id/exhibits',
+                    headers: { 'deviceId': '123456' }
                 }
             };
 
-            var resource = $resource(apiUrl + '/admin-web/events/:id', {}, actions)
+            var resource = $resource(apiUrl + '/events/:id', {}, actions)
 
-            resource.get({id: $stateParams.id}).$promise.then(function (resourceData) {
+            resource.getEventData({id: $stateParams.id}).$promise.then(function (resourceData) {
                 $scope.eventsData = resourceData.data;
+            });
+
+            resource.getEventExhibits({id: $stateParams.id}).$promise.then(function (resourceData) {
+                $scope.exhibits = resourceData.data;
             });
 
             $scope.eventId = $stateParams.id;
@@ -64,8 +76,8 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
                 $scope.updateObjectBeacons.push(updateObjectBeacon);
 
                 resource.setExhibitBeacon({id: beacon.id}, $scope.updateObjectBeacons);
-                resource.get({id: $stateParams.id}).$promise.then(function (resourceData) {
-                    $scope.eventsData = resourceData.data;
+                resource.getBeaconsList().$promise.then(function (beaconsData) {
+                    $scope.beaconsList= beaconsData.data;
                 });
                 $route.reload();
             }

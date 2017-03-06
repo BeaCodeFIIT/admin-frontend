@@ -154,7 +154,7 @@ angular
         }
     })
         .state('dashboard.categories',{
-            url:'/categories-:id',
+            url:'/event-:id/categories',
             controller: 'CategoriesCtrl',
             templateUrl:'categories/categories-list.html',
             resolve: {
@@ -167,6 +167,21 @@ angular
                             'scripts/directives/notifications/notifications.js',
                             'scripts/directives/chat/chat.js',
                             'scripts/directives/dashboard/stats/stats.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.category-new', {
+            url: '/event-:id/new-category',
+            controller: 'CategoriesCtrl',
+            templateUrl: 'categories/category-new.html',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'categories/categories-list.controller.js'
                         ]
                     })
                 }

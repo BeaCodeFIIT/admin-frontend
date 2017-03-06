@@ -5,7 +5,7 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
       function($scope, $resource) {
       'use strict';
 
-      var apiUrl = 'http://team06-16.studenti.fiit.stuba.sk/beacode_dev/current/web/app.php/api';
+      var apiUrl = 'http://team06-16.studenti.fiit.stuba.sk/beacode_dev/current/web/app.php/api/admin-web';
           //var apiUrl = 'http://147.175.149.218/beacode_dev/current/web/app.php/api';
 
       $scope.eventExhibits_1 = [];
@@ -19,16 +19,16 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
 
 
       var actions = {
-          create: {
+          createEvent: {
               method: 'POST',
               isArray: false,
-              url: apiUrl + '/admin-web/events/new',
+              url: apiUrl + '/events/new',
               headers: { 'deviceId': '123456' }
           },
           createExhibit: {
               method: 'POST',
               isArray: false,
-              url: apiUrl + '/admin-web/events/1/exhibits/new',
+              url: apiUrl + '/events/1/exhibits/new',
               headers: { 'deviceId': '123456' }
           },
           get: {
@@ -39,10 +39,16 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
           update: {
               method: 'PUT',
               headers: { 'deviceId': '123456' }
-          }
+          },
+          addImage: {
+              method: 'POST',
+              isArray: false,
+              url: apiUrl + '/events/:id/images/new',
+              headers: { 'deviceId': '123456' }
+          },
       };
 
-      var resource = $resource(apiUrl + '/admin-web/events', {}, actions)
+      var resource = $resource(apiUrl + '/events', {}, actions)
 
       resource.get().$promise.then(function (resourceData) {
           $scope.eventsData = resourceData.data;
@@ -65,8 +71,10 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
               end: $scope.eventEndDate,
               locationId: '1',
               description: $scope.eventDescription,
+              parentId: 0,
+              level: 0,
           }
-          resource.create(newEvent);
+          resource.createEvent(newEvent);
 
       }
       $scope.eventTitle = '';
