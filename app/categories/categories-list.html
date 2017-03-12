@@ -7,6 +7,15 @@
 
     <div class="panel-body">
         <div class="dataTable_wrapper">
+            <label for="location">Obrázok: </label>
+            <div>
+                <!--input type="file" ng-model="eventImage" /-->
+                <input type="file" id="file" name="file"/>
+            </div>
+            </br>
+            <button class="btn btn-primary" ng-click = "uploadImage()">Ulož obrázky</button>
+            </br>
+            </br>
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                 <tr>
