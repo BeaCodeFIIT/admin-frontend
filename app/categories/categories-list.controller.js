@@ -7,6 +7,7 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
 
             //var apiUrl = 'http://team06-16.studenti.fiit.stuba.sk/beacode_dev/current/web/app.php/api';
             var apiUrl = 'http://147.175.149.218/beacode_dev/current/web/app.php/api/admin-web';
+            $scope.apiImgUrl = 'http://147.175.149.218/beacode_dev/'
 
             $scope.categoriesData = new Array();
 
@@ -35,7 +36,7 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
             var resource = $resource(apiUrl + '/events/:id', {}, actions)
 
             resource.get({id: $stateParams.id}).$promise.then(function (resourceData) {
-                $scope.categoriesData = resourceData.data.categories;
+                $scope.eventData = resourceData.data;
             });
 
             $scope.eventId = $stateParams.id;

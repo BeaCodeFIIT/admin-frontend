@@ -7,7 +7,7 @@
 
     <div class="panel-body">
         <div class="dataTable_wrapper">
-            <label for="location">Obrázok: </label>
+            <label for="file">Obrázok: </label>
             <div>
                 <!--input type="file" ng-model="eventImage" /-->
                 <input type="file" id="file" name="file"/>
@@ -24,7 +24,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="category in categoriesData" class="odd gradeX">
+                <tr ng-repeat="category in eventData.categories" class="odd gradeX">
                     <td>{{category.name}}</td>
                     <td>
                         <button class="btn btn-primary" ui-sref="dashboard.event-detail({id: category.id})">
@@ -35,6 +35,11 @@
                 </tbody>
             </table>
             <button class="btn btn-primary" ui-sref="dashboard.category-new({id: eventId})">Pridať</button>
+        </div>
+        <br/>
+        <div ng-repeat="image in eventData.images">
+            <img src= "{{apiImgUrl}}{{image.pathWithFile}}" class="img-rounded"
+                 alt="Obrázok sa nenačítal!" width="30%" height="30%">
         </div>
     </div>
 
