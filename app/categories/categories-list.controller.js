@@ -7,7 +7,7 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
 
             //var apiUrl = 'http://team06-16.studenti.fiit.stuba.sk/beacode_dev/current/web/app.php/api';
             var apiUrl = 'http://147.175.149.218/beacode_dev/current/web/app.php/api/admin-web';
-            $scope.apiImgUrl = 'http://147.175.149.218/beacode_dev/'
+            $scope.apiImgUrl = 'http://147.175.149.218/beacode_dev'
 
             $scope.categoriesData = new Array();
 
@@ -27,6 +27,13 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
                     method: 'POST',
                     isArray: false,
                     url: apiUrl + '/events/:id/images/new',
+                    headers: { 'deviceId': '123456', 'Content-Type': undefined },
+                    transformRequest: angular.identity
+                },
+                uploadMap: {
+                    method: 'POST',
+                    isArray: false,
+                    url: apiUrl + '/events/:id/images/new?objectType=event-map',
                     headers: { 'deviceId': '123456', 'Content-Type': undefined },
                     transformRequest: angular.identity
                 },
@@ -74,14 +81,14 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
                     r = new FileReader();
                 fd.append('image', f);
                 resource.uploadImages({id: $stateParams.id}, fd);
+            }
 
-                /*var f = document.getElementById('file').files[0],
+            $scope.uploadMap = function() {
+                var fd = new FormData();
+                var f = document.getElementById('map').files[0],
                     r = new FileReader();
-                r.onloadend = function(e){
-                    $scope.data = e.target.result;
-                }
-                r.readAsBinaryString(f);
-                resource.uploadImages({id: $stateParams.id}, f)*/;
+                fd.append('image', f);
+                resource.uploadMap({id: $stateParams.id}, fd);
             }
 
 

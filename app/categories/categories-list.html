@@ -6,16 +6,23 @@
     </div>
 
     <div class="panel-body">
+        <label for="file">Mapa: </label>
+        <div>
+            <input type="file" id="map" name="map"/>
+        </div>
+        </br>
+        <button class="btn btn-primary" ng-click="uploadMap()">Ulož mapu</button>
+        </br>
+        </br>
+        <div>
+            <a href="{{apiImgUrl}}{{eventData.map.pathWithFile}}">
+                <img  src= "{{apiImgUrl}}{{eventData.map.pathWithFile}}" class="img-rounded"
+                      alt="Mapa sa nenačítala!" width="50%" height="50%">
+
+            </a>
+        </div>
+        </br>
         <div class="dataTable_wrapper">
-            <label for="file">Obrázok: </label>
-            <div>
-                <!--input type="file" ng-model="eventImage" /-->
-                <input type="file" id="file" name="file"/>
-            </div>
-            </br>
-            <button class="btn btn-primary" ng-click = "uploadImage()">Ulož obrázky</button>
-            </br>
-            </br>
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                 <tr>
@@ -34,12 +41,22 @@
                 </tr>
                 </tbody>
             </table>
-            <button class="btn btn-primary" ui-sref="dashboard.category-new({id: eventId})">Pridať</button>
+            <button class="btn btn-primary" ui-sref="dashboard.category-new({id: eventId})">Pridať kategóriu</button>
         </div>
         <br/>
+        <div>
+            <input type="file" id="file" name="file"/>
+        </div>
+        </br>
+        <button class="btn btn-primary" ng-click = "uploadImage()">Ulož obrázok</button>
+        </br>
+        </br>
+        <label for="file">Obrázky podujatia: </label>
         <div ng-repeat="image in eventData.images">
-            <img src= "{{apiImgUrl}}{{image.pathWithFile}}" class="img-rounded"
-                 alt="Obrázok sa nenačítal!" width="30%" height="30%">
+            <a href="{{apiImgUrl}}{{image.pathWithFile}}">
+                <img  src= "{{apiImgUrl}}{{image.pathWithFile}}" class="img-rounded"
+                      alt="Obrázok sa nenačítal!" width="304" height="236">
+            </a>
         </div>
     </div>
 
