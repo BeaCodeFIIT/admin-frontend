@@ -49,8 +49,8 @@
                                 <th>Názov exponátu</th>
                                 <th>Popis</th>
                                 <th>Beacon</th>
-
                                 <th>Zoznam beaconov</th>
+                                <th>Poster</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -60,12 +60,26 @@
                                 <td>{{exhibit.description}}</td>
                                 <td>
                                     <select ng-click="selectBeacon(exhibit.id, exhibit.beacon)" ng-model="exhibit.beacon"
-                                            ng-options="'UUID:' + x.UUID +' Major:'+ x.major + ' Minor:' + x.minor + ' Id:' + x.id for x in beaconsList">
+                                            ng-options="'UUID:' + x.UUID +' Major:'+ x.major + ' Minor:' + x.minor +
+                                                        ' Id:' + x.id for x in beaconsList">
 
                                     </select>
                                 </td>
-
                                 <td>{{exhibit.beacons[0]}}</td>
+                                <td>
+                                    <div>
+                                        <input type="file" id="file{{exhibit.id}}" name="file"/>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-primary" ng-click = "uploadImage(exhibit.id)">Ulož poster</button>
+                                    </div>
+                                    <div>
+                                        <a href="{{apiImgUrl}}{{exhibit.images[0].pathWithFile}}">
+                                              <img  src= "{{apiImgUrl}}{{exhibit.images[0].pathWithFile}}" class="img-rounded"
+                                                    alt="Obrázok sa nenačítal!" width="50%" height="50%">
+                                        </a>
+                                    </div>
+                                </td>
                             </tr>
                             </tbody>
                         </table>

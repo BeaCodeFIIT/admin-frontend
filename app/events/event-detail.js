@@ -6,6 +6,7 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
             'use strict';
 
             var apiUrl = 'http://team06-16.studenti.fiit.stuba.sk/beacode_dev/current/web/app.php/api/admin-web';
+            $scope.apiImgUrl = 'http://147.175.149.218/beacode_dev'
 
             //var apiUrl = 'http://147.175.149.218/beacode_dev/current/web/app.php/api';
 
@@ -41,7 +42,14 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
                     isArray: false,
                     url: apiUrl + '/events/:id/exhibits',
                     headers: { 'deviceId': '123456' }
-                }
+                },
+                uploadImages: {
+                    method: 'POST',
+                    isArray: false,
+                    url: apiUrl + '/events/:eventId/exhibits/:exhibitId/images/new',
+                    headers: { 'deviceId': '123456', 'Content-Type': undefined },
+                    transformRequest: angular.identity
+                },
             };
 
             var resource = $resource(apiUrl + '/events/:id', {}, actions)
@@ -82,6 +90,13 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
                 $route.reload();
             }
 
+            $scope.uploadImage = function(exhibitId) {
+                var fd = new FormData();
+                var f = document.getElementById('file'+exhibitId).files[0],
+                    r = new FileReader();
+                fd.append('image', f);
+                resource.uploadImages({eventId: $scope.eventId, exhibitId:exhibitId}, fd);
+            }
 
 
         }]);
