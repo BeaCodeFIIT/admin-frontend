@@ -37,6 +37,12 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
                     headers: { 'deviceId': '123456', 'Content-Type': undefined },
                     transformRequest: angular.identity
                 },
+                parseBeaconsFromMap: {
+                    method: 'PUT',
+                    isArray: false,
+                    url: apiUrl + '/events/:id/parse-beacon-svg',
+                    headers: { 'deviceId': '123456' }
+                },
             };
 
 
@@ -89,6 +95,10 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
                     r = new FileReader();
                 fd.append('image', f);
                 resource.uploadMap({id: $stateParams.id}, fd);
+            }
+
+            $scope.parseBeacons = function() {
+                resource.parseBeaconsFromMap({id: $stateParams.id});
             }
 
 
