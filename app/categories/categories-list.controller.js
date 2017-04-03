@@ -39,8 +39,7 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
                 },
                 parseBeaconsFromMap: {
                     method: 'PUT',
-                    isArray: false,
-                    url: apiUrl + '/events/:id/parse-beacon-svg',
+                    url: apiUrl + '/events/2/parse-beacon-svg',
                     headers: { 'deviceId': '123456' }
                 },
             };
@@ -98,7 +97,7 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
             }
 
             $scope.parseBeacons = function() {
-                resource.parseBeaconsFromMap({id: $stateParams.id});
+                resource.parseBeaconsFromMap();
             }
 
 
