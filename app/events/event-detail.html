@@ -45,6 +45,7 @@
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                             <tr>
+                                <th></th>
                                 <th>Id</th>
                                 <th>Názov exponátu</th>
                                 <th>Popis</th>
@@ -55,6 +56,7 @@
                             </thead>
                             <tbody>
                             <tr ng-repeat="exhibit in exhibits" class="odd gradeX">
+                                <td><i class="fa fa-times" aria-hidden="true" ng-click="deleteExhibit(exhibit.id)"></i></td>
                                 <td>{{exhibit.id}}</td>
                                 <td>{{exhibit.name}}</td>
                                 <td>{{exhibit.description}}</td>

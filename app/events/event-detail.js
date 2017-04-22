@@ -1,8 +1,8 @@
 
 
 angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
-    .controller('EventDetailCtrl', ['$scope', '$resource', '$stateParams', '$route',
-        function($scope, $resource, $stateParams, $route) {
+    .controller('EventDetailCtrl', ['$scope', '$resource', '$stateParams', '$route', '$window',
+        function($scope, $resource, $stateParams, $route, $window) {
             'use strict';
 
             var apiUrl = 'http://team06-16.studenti.fiit.stuba.sk/beacode_dev/current/web/app.php/api/admin-web';
@@ -46,7 +46,14 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
                 uploadImages: {
                     method: 'POST',
                     isArray: false,
-                    url: apiUrl + '/events/:eventId/exhibits/:exhibitId/images/new',
+                    url: apiUrl + '/events/:id/exhibits/:exhibitId/images/new',
+                    headers: { 'deviceId': '123456', 'Content-Type': undefined },
+                    transformRequest: angular.identity
+                },
+                deleteExhibit: {
+                    method: 'DELETE',
+                    isArray: false,
+                    url: apiUrl + '/events/:eventId/exhibits/:exhibitId',
                     headers: { 'deviceId': '123456', 'Content-Type': undefined },
                     transformRequest: angular.identity
                 },
@@ -96,6 +103,13 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
                     r = new FileReader();
                 fd.append('image', f);
                 resource.uploadImages({eventId: $scope.eventId, exhibitId:exhibitId}, fd);
+            }
+
+            $scope.deleteExhibit = function(exhibitId) {
+                resource.deleteExhibit({eventId: $scope.eventId, exhibitId:exhibitId})
+                    .$promise.then(function () {
+                    $window.location.reload();
+                });
             }
 
 
