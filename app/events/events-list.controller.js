@@ -1,8 +1,8 @@
 
 
 angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
-  .controller('EventsCtrl', ['$scope', '$resource',
-      function($scope, $resource) {
+  .controller('EventsCtrl', ['$scope', '$resource', '$window',
+      function($scope, $resource, $window) {
       'use strict';
 
       var apiUrl = 'http://team06-16.studenti.fiit.stuba.sk/beacode_dev/current/web/app.php/api/admin-web';
@@ -45,6 +45,13 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
               isArray: false,
               url: apiUrl + '/events/:id/images/new',
               headers: { 'deviceId': '123456' }
+          },
+          deleteEvent: {
+              method: 'DELETE',
+              isArray: false,
+              url: apiUrl + '/events/:eventId',
+              headers: { 'deviceId': '123456', 'Content-Type': undefined },
+              transformRequest: angular.identity
           },
       };
 
@@ -89,7 +96,12 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
               description: $scope.exhibitDescription,
           }
           resource.createExhibit(newExhibit);
+      }
 
+      $scope.deleteEvent = function(eventId) {
+          resource.deleteEvent({eventId: eventId}).$promise.then(function () {
+              $window.location.reload();
+          });
       }
 
   }]);
