@@ -42,6 +42,13 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
                     url: apiUrl + '/events/2/parse-beacon-svg',
                     headers: { 'deviceId': '123456' }
                 },
+                deleteCategory: {
+                    method: 'DELETE',
+                    isArray: false,
+                    url: apiUrl + '',
+                    headers: { 'deviceId': '123456', 'Content-Type': undefined },
+                    transformRequest: angular.identity
+                },
             };
 
 
@@ -101,6 +108,13 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
             }
 
 
+            //TODO dokoncit
+            $scope.deleteCategory = function(categoryId) {
+                resource.deleteCategory()
+                    .$promise.then(function () {
+                    $window.location.reload();
+                });
+            }
 
 
 
