@@ -45,7 +45,7 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
                 deleteCategory: {
                     method: 'DELETE',
                     isArray: false,
-                    url: apiUrl + '',
+                    url: apiUrl + '/events/:categoryId',
                     headers: { 'deviceId': '123456', 'Content-Type': undefined },
                     transformRequest: angular.identity
                 },
@@ -107,10 +107,8 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
                 resource.parseBeaconsFromMap();
             }
 
-
-            //TODO dokoncit
             $scope.deleteCategory = function(categoryId) {
-                resource.deleteCategory()
+                resource.deleteCategory({categoryId: categoryId})
                     .$promise.then(function () {
                     $window.location.reload();
                 });
