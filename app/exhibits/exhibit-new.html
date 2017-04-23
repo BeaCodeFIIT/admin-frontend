@@ -16,6 +16,11 @@
             <textarea class="form-control" id="description" rows="3" value="" type="text"
                       ng-model="exhibitDescription" placeholder="Opis exponátu" ></textarea>
         </div>
+        <div class="form-group">
+            <label for="notification">Notifikácia: </label>
+            <textarea class="form-control" id="notification" rows="3" value="" type="text"
+                      ng-model="exhibitPushNotification" placeholder="Text notifikácie" ></textarea>
+        </div>
         <button class="btn btn-primary" ng-click="addExhibit()" ui-sref="dashboard.event-detail({id: eventId})">Pridať</button>
     </form>
 
