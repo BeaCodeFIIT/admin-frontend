@@ -57,6 +57,12 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
                     headers: { 'deviceId': '123456', 'Content-Type': undefined },
                     transformRequest: angular.identity
                 },
+                setExhibitNotification: {
+                    method: 'PATCH',
+                    isArray: false,
+                    url: apiUrl + '/events/:eventId/exhibits/:exhibitId',
+                    headers: { 'deviceId': '123456' }
+                },
             };
 
             var resource = $resource(apiUrl + '/events/:id', {}, actions)
@@ -80,8 +86,6 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
 
 
             $scope.selectBeacon = function (exhibitId, beacon) {
-                console.log(exhibitId);
-                console.log(beacon.id);
                 $scope.updateObjectBeacons = [];
                 var updateObjectBeacon = {
                     'op': 'replace',
@@ -110,6 +114,17 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
                     .$promise.then(function () {
                     $window.location.reload();
                 });
+            }
+
+            $scope.addNotification = function(exhibitId, exhibitNotification) {
+                $scope.updateObjectExhibits = [];
+                var updateObjectExhibit = {
+                    op: 'replace',
+                    path: '/pushNotification',
+                    value: exhibitNotification,
+                }
+                $scope.updateObjectExhibits.push(updateObjectExhibit);
+                resource.setExhibitNotification({eventId: $scope.eventId, exhibitId: exhibitId}, $scope.updateObjectExhibits);
             }
 
 

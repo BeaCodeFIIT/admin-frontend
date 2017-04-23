@@ -52,6 +52,7 @@
                                 <th>Beacon</th>
                                 <th>Beacon Id</th>
                                 <th>Poster</th>
+                                <th>Notifikácia</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -81,6 +82,43 @@
                                                     alt="Obrázok sa nenačítal!" width="50%" height="50%">
                                         </a>
                                     </div>
+                                </td>
+                                <td>
+                                    <!--button type="button" class="btn btn-info" data-toggle="modal" data-target="#notifModal">
+                                        Pridať
+                                    </button-->
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="notifModal" role="dialog">
+                                        <div class="modal-dialog">
+
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">Nofitikácia</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label for="notification">Text notifikácie: </label>
+                                                        <textarea class="form-control" id="notification" rows="3" value="" type="text"
+                                                                  ng-model="exhibitNotification" placeholder="Push notifikácia" ></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary"
+                                                            ng-click="addNotification(exhibit.id, exhibitNotification)">
+                                                            Pridať
+                                                    </button>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Zatvoriť</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    {{exhibit.pushNotification}}
+
                                 </td>
                             </tr>
                             </tbody>
