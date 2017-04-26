@@ -26,7 +26,7 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
                     pushNotification: $scope.exhibitPushNotification,
                 }
                 resource.createExhibit({id: $stateParams.id},newExhibit);
-                $window.location.href = 'dashboard.event-detail({id: $stateParams.id})';
+                //$window.location.href = 'dashboard.event-detail({id: $stateParams.id})';
             }
 
             $scope.eventId = $stateParams.id;
