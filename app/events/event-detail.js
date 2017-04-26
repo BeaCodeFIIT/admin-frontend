@@ -46,9 +46,8 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
                 uploadImages: {
                     method: 'POST',
                     isArray: false,
-                    url: apiUrl + '/events/:id/exhibits/:exhibitId/images/new',
+                    url: apiUrl + '/events/:eventId/exhibits/:exhibitId/images/new',
                     headers: { 'deviceId': '123456', 'Content-Type': undefined },
-                    transformRequest: angular.identity
                 },
                 deleteExhibit: {
                     method: 'DELETE',
@@ -106,7 +105,7 @@ angular.module('sbAdminApp', ['ngResource', 'ngRoute'])
                 var f = document.getElementById('file'+exhibitId).files[0],
                     r = new FileReader();
                 fd.append('image', f);
-                resource.uploadImages({eventId: $scope.eventId, exhibitId:exhibitId}, fd);
+                resource.uploadImages({eventId: $scope.eventId, exhibitId: exhibitId}, fd);
             }
 
             $scope.deleteExhibit = function(exhibitId) {
