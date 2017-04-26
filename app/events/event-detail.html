@@ -48,7 +48,7 @@
                                 <th></th>
                                 <th>Id</th>
                                 <th>Názov exponátu</th>
-                                <th>Popis</th>
+                                <!--th>Popis</th-->
                                 <th>Beacon</th>
                                 <th>Beacon Id</th>
                                 <th>Poster</th>
@@ -60,7 +60,7 @@
                                 <td><i class="fa fa-times" aria-hidden="true" ng-click="deleteExhibit(exhibit.id)"></i></td>
                                 <td>{{exhibit.id}}</td>
                                 <td>{{exhibit.name}}</td>
-                                <td>{{exhibit.description}}</td>
+                                <!--td>{{exhibit.description}}</td-->
                                 <td>
                                     <select ng-click="selectBeacon(exhibit.id, exhibit.beacon)" ng-model="exhibit.beacon"
                                             ng-options="'UUID:' + x.UUID +' Major:'+ x.major + ' Minor:' + x.minor +
